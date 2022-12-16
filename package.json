@@ -1,0 +1,32 @@
+{
+  "name": "bean_noodle",
+  "version": "1.0.0",
+  "description": "a discord named bean noodle",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon -r dotenv/config index.js",
+    "start": "node -r dotenv/config index.js",
+    "deploy": "node -r dotenv/config deploy-commands.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pwhb/bean_noodle.git"
+  },
+  "keywords": [
+    "discord"
+  ],
+  "author": "pwhb",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pwhb/bean_noodle/issues"
+  },
+  "homepage": "https://github.com/pwhb/bean_noodle#readme",
+  "devDependencies": {
+    "eslint": "^8.29.0",
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3"
+  }
+}
