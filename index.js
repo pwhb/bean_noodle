@@ -1,10 +1,11 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { Client, Collection, Events, GatewayIntentBits } = require("discord.js");
+const { getUserString } = require("./utils/format");
 const token = process.env.TOKEN;
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, "commands");
 const commandFiles = fs
@@ -18,7 +19,7 @@ for (const file of commandFiles) {
 }
 
 client.once(Events.ClientReady, () => {
-  const readyString = `${client.user.username}#${client.user.discriminator} is ready!!!`;
+  const readyString = `${getUserString(client.user)} is ready!!!`;
   console.log(readyString);
 });
 
@@ -41,3 +42,4 @@ client.on(Events.InteractionCreate, async (interaction) => {
 });
 
 client.login(token);
+

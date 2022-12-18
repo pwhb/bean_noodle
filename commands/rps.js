@@ -1,35 +1,46 @@
 const { SlashCommandBuilder } = require("discord.js");
+const { getUserString, getVSString } = require("../utils/format");
 
 const moves = {
-  rock: "ROCK",
-  paper: "PAPER",
-  scissors: "SCISSORS",
+  rock: "ROCK ✊",
+  paper: "PAPER ✋",
+  scissors: "SCISSORS ✌️",
 };
 
 const results = {
-  win: "WIN",
-  lose: "LOSE",
-  draw: "DRAW",
+  win: "You win.",
+  lose: "You lose.",
+  draw: "It's a draw.",
 };
 
-const getResponse = (move) => {
+
+
+const getComputerMove = () => {
   const choices = Object.values(moves);
   const randomIndex = Math.floor(Math.random() * choices.length);
-  const randomChoice = choices[randomIndex];
+  const computerMove = choices[randomIndex];
+  return computerMove
+}
+
+const getResponse = (move, player1, player2) => {
+  const computerMove = getComputerMove()
   const response = {
-    vs: `You: ${move} vs Bean Noodle: ${randomChoice}`,
+    // vsString: `${player1}       ${player2}\n${move} vsString ${computerMove}`,
+    vsString: getVSString(player1, player2, move, computerMove)
   };
-  if (move === randomChoice) {
+  if (move === computerMove) {
     response.result = results.draw;
-  }
-  if (
-    (move === moves.rock && randomChoice === moves.scissors) ||
-    (move === moves.paper && randomChoice === moves.rock) ||
-    (move === moves.scissors && randomChoice === moves.paper)
+  } else if (
+    (move === moves.rock && computerMove === moves.scissors) ||
+    (move === moves.paper && computerMove === moves.rock) ||
+    (move === moves.scissors && computerMove === moves.paper)
   ) {
     response.result = results.win;
+  } else {
+    response.result = results.lose;
   }
-  response.result = results.lose;
+
+  return response;
 };
 
 module.exports = {
@@ -49,8 +60,9 @@ module.exports = {
     ),
   async execute(interaction) {
     const move = interaction.options.getString("move");
-    const response = getResponse(move);
-
-    return interaction.reply(response.vs + "\n" + response.result);
+    const player1 = getUserString(interaction.user)
+    const player2 = "bean_noodle"
+    const response = getResponse(move, player1, player2);
+    return interaction.reply(response.vsString + response.result);
   },
 };
