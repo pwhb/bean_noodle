@@ -12,7 +12,8 @@ module.exports = {
     const { user } = interaction
     const member = interaction.options.getMember("whom");
     // const gifUrl = "https://tenor.com/bRn7v.gif"
-    const gifUrl = "https://cdn3.emoji.gg/emojis/1473-tongue-kissy.gif"
+    // const gifUrl = "https://cdn3.emoji.gg/emojis/1473-tongue-kissy.gif"
+    const gifUrl = "https://media.tenor.com/ONx_IN1MwtEAAAAi/mochi.gif"
     const embed = new EmbedBuilder()
       .setTitle(`${user.username} is kissing ${member.user.username}\n`)
       .setURL(gifUrl)
