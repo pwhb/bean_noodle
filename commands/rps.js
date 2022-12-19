@@ -1,7 +1,7 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, userMention } = require("discord.js");
 const { getUserString, getVSString } = require("../utils/format");
 const { getRandom } = require("../utils/random");
-const json = require("../utils/constants/kiss.json")
+const bot = require("../utils/constants/bean_noodle.json")
 
 const moves = {
   rock: "ROCK ✊",
@@ -51,7 +51,7 @@ module.exports = {
     .addStringOption((option) =>
       option
         .setName("move")
-        .setDescription("Make your move []")
+        .setDescription("Make your move")
         .setRequired(true)
         .addChoices(
           { name: "rock", value: moves.rock },
@@ -61,8 +61,8 @@ module.exports = {
     ),
   async execute(interaction) {
     const move = interaction.options.getString("move");
-    const player1 = getUserString(interaction.user)
-    const player2 = "bean_noodle"
+    const player1 = userMention(interaction.user.id)
+    const player2 = bot.mention
     const response = getResponse(move, player1, player2);
     return interaction.reply(response.vsString + response.result);
   },
