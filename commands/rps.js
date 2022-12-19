@@ -1,5 +1,7 @@
 const { SlashCommandBuilder } = require("discord.js");
 const { getUserString, getVSString } = require("../utils/format");
+const { getRandom } = require("../utils/random");
+const json = require("../utils/constants/kiss.json")
 
 const moves = {
   rock: "ROCK ✊",
@@ -17,8 +19,7 @@ const results = {
 
 const getComputerMove = () => {
   const choices = Object.values(moves);
-  const randomIndex = Math.floor(Math.random() * choices.length);
-  const computerMove = choices[randomIndex];
+  const computerMove = getRandom(choices)
   return computerMove
 }
 
