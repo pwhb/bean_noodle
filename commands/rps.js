@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, userMention } = require("discord.js");
-const { getUserString, getVSString } = require("../utils/format");
-const { getRandom } = require("../utils/random");
-const bot = require("../utils/constants/bean_noodle.json");
+const { getUserString, getVSString } = require("../lib/format");
+const { getRandom } = require("../lib/random");
+const bot = require("../lib/constants/bean_noodle.json");
 
 const moves = {
   rock: "ROCK ✊",

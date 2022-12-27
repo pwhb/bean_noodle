@@ -1,7 +1,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { Client, Collection, Events, GatewayIntentBits } = require("discord.js");
-const { getUserString } = require("./utils/format");
+const { getUserString } = require("./lib/format");
 const token = process.env.TOKEN;
 
 

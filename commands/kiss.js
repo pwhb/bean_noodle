@@ -1,7 +1,7 @@
 const { EmbedBuilder, userMention } = require("@discordjs/builders");
 const { SlashCommandBuilder } = require("discord.js");
-const json = require("../utils/constants/kiss.json");
-const { getRandom } = require("../utils/random");
+const json = require("../lib/constants/kiss.json");
+const { getRandom } = require("../lib/random");
 
 module.exports = {
   data: new SlashCommandBuilder()

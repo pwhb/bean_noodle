@@ -1,6 +1,8 @@
 const { SlashCommandBuilder, quote, bold } = require("discord.js");
 const { getMovies } = require("../api/tmdb/movies");
-const { getYear, getMovieListString } = require("../utils/format");
+const { getMovieEmbeds } = require("../lib/controllers/embeds");
+const { filterByYear } = require("../lib/controllers/filter");
+const { getYear, getMovieListString } = require("../lib/format");
 
 const types = {
   movie: "MOVIE",
@@ -33,22 +35,15 @@ module.exports = {
     const searchType = interaction.options.getString("type");
     const releaseYear = interaction.options.getString("year");
     const { results } = await getMovies(searchQuery);
-    const initailLine = `${bold("Search")}, type: ${searchType.toLowerCase()}, title: ${searchQuery} ${
+    const initailLine = `${bold(
+      "Search"
+    )}, type: ${searchType.toLowerCase()}, title: ${searchQuery} ${
       releaseYear ? `, Year: ${releaseYear}` : ""
     }\n\n`;
-    let responseString = quote(initailLine);
+    const responseString = quote(initailLine);
 
-    if (releaseYear) {
-      console.log("releaseYear", releaseYear);
-      const filteredResults = results.filter(
-        ({ release_date }) => releaseYear === getYear(release_date)
-      );
-
-      responseString += getMovieListString(filteredResults);
-    } else {
-      responseString += getMovieListString(results);
-    }
-
-    return interaction.reply(responseString);
+    const movies = filterByYear(results, releaseYear).slice(0, 9);
+    const embeds = getMovieEmbeds(movies);
+    return interaction.reply({ content: responseString, embeds });
   },
 };

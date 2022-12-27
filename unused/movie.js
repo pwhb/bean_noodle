@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, quote, bold } = require("discord.js");
 const { getMovies } = require("../api/tmdb/movies");
-const { getYear, getMovieListString } = require("../utils/format");
+const { getYear, getMovieListString } = require("../lib/format");
 
 module.exports = {
   data: new SlashCommandBuilder()
