@@ -4,7 +4,6 @@ const { Client, Collection, Events, GatewayIntentBits } = require("discord.js");
 const { getUserString } = require("./lib/format");
 const token = process.env.TOKEN;
 
-
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, "commands");
